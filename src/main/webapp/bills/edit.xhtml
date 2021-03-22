@@ -1,0 +1,75 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:b="http://bootsfaces.net/ui"
+        template="/WEB-INF/jsf-templates/layout.xhtml">
+
+    <ui:param name="title" value="Edit Bill"/>
+
+    <ui:define name="maincontent">
+
+        <b:jumbotron>
+            <h1>Edit Bill</h1>
+        </b:jumbotron>
+
+        <b:messages id="messages"/>
+
+        <b:form>
+
+            <b:panel title="Bill Details"
+                     collapsible="false"
+            >
+                <b:inputText id="entityId"
+                             label="Bill ID"
+                             value="#{currentBillEditController.editId}"
+                             readonly="true">
+                </b:inputText>
+
+                <b:inputText
+                        id="payeeName"
+                        label="Payee Namee"
+                        value="#{currentBillEditController.existingBill.payeeName}">
+                    <b:focus/> <!-- set focus on the first editable field -->
+                </b:inputText>
+
+                <b:inputText
+                        id="amountDue"
+                        label="Amount Due"
+                        value="#{currentBillEditController.existingBill.amountDue}">
+                </b:inputText>
+
+                <b:dateTimePicker
+                        id="dueDate"
+                        label="Due Date"
+                        value="#{currentBillEditController.existingBill.dueDate}"
+                        format="MMM DD, YYYY"
+                >
+                    <f:convertDateTime type="localDate" pattern="MMM dd, yyyy" />
+                </b:dateTimePicker>
+
+            </b:panel>
+
+            <b:commandButton value="Save"
+                             look="primary"
+                             iconAwesome="save"
+                             action="#{currentBillEditController.onUpdate()}"
+                             ajax="false" />
+            |
+            <b:link id="backToListLink" outcome="index">
+                Back to List
+            </b:link>
+
+        </b:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,70 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:b="http://bootsfaces.net/ui"
+        template="/WEB-INF/jsf-templates/layout.xhtml">
+
+    <ui:param name="title" value="Create Bill"/>
+
+    <ui:define name="maincontent">
+
+        <b:jumbotron>
+            <h1>Create Bill</h1>
+        </b:jumbotron>
+
+        <b:messages id="messages"/>
+
+        <b:form>
+
+            <b:panel title="Bill Details"
+                     collapsible="false"
+            >
+                <b:inputText
+                        id="payeeName"
+                        label="Payee Name"
+                        value="#{currentBillCreateController.newBill.payeeName}">
+                    <b:focus/> <!-- set focus on the first editable field -->
+                </b:inputText>
+
+                <b:inputText
+                        id="amountDue"
+                        label="Amount Due"
+                        value="#{currentBillCreateController.newBill.amountDue}">
+                </b:inputText>
+
+               <b:dateTimePicker
+                        id="dueDate"
+                        label="Due Date"
+                        value="#{currentBillCreateController.newBill.dueDate}"
+                        format="MMM D, YYYY"
+                >
+                    <f:convertDateTime type="localDate" pattern="MMM d, yyyy" />
+                </b:dateTimePicker>
+
+                <b:commandButton
+                        value="Create"
+                        look="primary"
+                        iconAwesome="save"
+                        action="#{currentBillCreateController.onCreate()}"
+                        ajax="false"
+                />
+
+            </b:panel>
+            <b:link id="backToListLink" outcome="index">
+                Back to List
+            </b:link>
+
+        </b:form>
+
+    </ui:define>
+
+</ui:composition>
